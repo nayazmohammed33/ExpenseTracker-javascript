@@ -1,5 +1,6 @@
+console.log('Hello!');
 document.addEventListener("DOMContentLoaded", () => {
-  let expenses = [];
+  let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
 
   const amountInput = document.getElementById("amount");
   const descriptionInput = document.getElementById("description");
@@ -26,6 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     expenses.push(expense);
+    saveToLocalStorage();
     renderExpenses();
     clearInputs();
   }
@@ -42,8 +44,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  function saveToLocalStorage() {
+    localStorage.setItem("expenses", JSON.stringify(expenses));
+  }
+
   window.deleteExpense = function(id) {
     expenses = expenses.filter(exp => exp.id !== id);
+    saveToLocalStorage();
     renderExpenses();
   };
 
@@ -60,4 +67,5 @@ document.addEventListener("DOMContentLoaded", () => {
     descriptionInput.value = "";
     categorySelect.value = "Movie";
   }
+  renderExpenses();
 });
