@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const categorySelect = document.getElementById("category");
   const expenseList = document.getElementById("expense-list");
 
-  document.querySelector("button").addEventListener("click", addExpense);
+ document.getElementById("add-expense").addEventListener("click", addExpense);
 
   function addExpense() {
     const amount = amountInput.value;
